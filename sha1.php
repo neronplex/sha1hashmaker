@@ -4,7 +4,7 @@ session_start();
 
 // CSRF対策トークン生成関数
 function settoken() {
-	$token = sha1(uniqid(mt_rand(),true)); # sha1
+	$token = sha1(uniqid(mt_rand(),true)); # 現在時刻を元にした乱数からsha1ハッシュを生成
 	$_SESSION[token] = $token;
 }
 
