@@ -4,13 +4,15 @@ session_start();
 
 // CSRF対策トークン生成関数
 function settoken() {
-	$token = sha1(uniqid(mt_rand(),true)); # 現在時刻を元にした乱数からsha1ハッシュを生成
+	# 現在時刻を元にした乱数からsha1ハッシュを生成
+	$token = sha1(uniqid(mt_rand(),true));
 	$_SESSION[token] = $token;
 }
 
 // トークンチェック関数
 function checktoken() {
-	if(empty($_SESSION[token]) || ($_SESSION[token] != $_POST[token])) # トークンが空かもしくはPOSTされたトークンと値が違う
+	# トークンが空かもしくはPOSTされたトークンと値が違う
+	if(empty($_SESSION[token]) || ($_SESSION[token] != $_POST[token]))
 	{
 	print('不正な投稿が行われました。');
 	exit;
@@ -20,23 +22,25 @@ function checktoken() {
 // POSTされたときの処理
 if($_SERVER[REQUEST_METHOD] != 'POST')
 	{
-	// CSRF対策フロー
+	// トークンをセット
 	settoken();
 	}
 	else{
+	// トークンをチェック
 	checktoken();
 
+	// ポストされてきた文字列を変数へ格納
 	$string = $_POST[string];
 
-	// エラーチェック
+	// エラーチェック用の連想配列
 	$err = array();
 
-	// ハッシュ化したい文字列が空？
-	if($string == ''){
-	$err[string] = 'ハッシュ化したい文字列が入力されていません。';
-	}
+		// ハッシュ化したい文字列が空？
+		if($string == ''){
+		$err[string] = 'ハッシュ化したい文字列が入力されていません。';
+		}
 
-	//ハッシュ化
+	//問題がなければハッシュ化
 	if(empty($err)){
 		$hash = sha1($string);
 		$hashed = "ハッシュ化した文字列 : $hash";
