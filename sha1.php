@@ -14,6 +14,7 @@ function checktoken() {
 	# トークンが空かもしくはPOSTされたトークンと値が違う
 	if(empty($_SESSION[token]) || ($_SESSION[token] != $_POST[token]))
 	{
+	# メッセージを表示してスクリプトの処理を終了
 	print('不正な投稿が行われました。');
 	exit;
 	}
@@ -43,6 +44,7 @@ if($_SERVER[REQUEST_METHOD] != 'POST')
 	//問題がなければハッシュ化
 	if(empty($err)){
 		$hash = sha1($string);
+		# ハッシュ値をメッセージとして再格納
 		$hashed = "ハッシュ化した文字列 : $hash";
 	}
 }
