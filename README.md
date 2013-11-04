@@ -1,4 +1,4 @@
 sha1hashmaker
 =============
 
-sha1 hash maker for PHP
+PHPとHTMLを複合したコーディングの練習として、任意の文字列をsha1ハッシュとして出力するフォームを作りました。
