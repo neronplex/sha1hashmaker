@@ -45,7 +45,7 @@ if($_SERVER[REQUEST_METHOD] != 'POST')
 	if(empty($err)){
 		$hash = sha1($string);
 		# ハッシュ値をメッセージとして再格納
-		$hashed = "ハッシュ化した文字列 : $hash";
+		$message = "ハッシュ化した文字列 : $hash";
 	}
 }
 
@@ -72,7 +72,7 @@ if($_SERVER[REQUEST_METHOD] != 'POST')
 	<p>ハッシュ化したい文字列 <input type="text" name="string" value="<?php echo $string; ?>"> <?php echo $err[string]; ?></p>
 
 	<!- ハッシュ値出力部分 ->
-	<p><?php echo htmlspecialchars($hashed,ENT_QUOTES,""); ?></p>
+	<p><?php echo htmlspecialchars($message,ENT_QUOTES,""); ?></p>
 
 	<- submitボタン ->
 	<input type="submit" value="ハッシュ化">
